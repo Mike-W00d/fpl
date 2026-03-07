@@ -102,3 +102,7 @@ insert into auth.identities (
   now(),
   now()
 );
+
+-- Seed FPL accounts
+insert into public.fpl_accounts (user_id, fpl_team_id) values
+  ('a1b2c3d4-e5f6-7890-abcd-ef1234567890', 222445);

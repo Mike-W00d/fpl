@@ -1,6 +1,7 @@
 -- Create profiles table
 create table public.profiles (
   id uuid references auth.users(id) on delete cascade primary key,
+  display_name text,
   created_at timestamptz default now() not null,
   updated_at timestamptz default now() not null
 );
@@ -25,8 +26,8 @@ language plpgsql
 security definer set search_path = ''
 as $$
 begin
-  insert into public.profiles (id)
-  values (new.id);
+  insert into public.profiles (id, display_name)
+  values (new.id, new.raw_user_meta_data ->> 'full_name');
   return new;
 end;
 $$;
@@ -39,7 +40,6 @@ create trigger on_auth_user_created
 create or replace function public.handle_updated_at()
 returns trigger
 language plpgsql
-security definer set search_path = ''
 as $$
 begin
   new.updated_at = now();

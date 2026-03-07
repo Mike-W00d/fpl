@@ -31,6 +31,7 @@ export function DesktopTopNav({ isAuthenticated }: DesktopTopNavProps) {
   const handleSignOut = async () => {
     const supabase = createClient();
     await supabase.auth.signOut();
+    router.refresh();
     router.push("/auth/login");
   };
 
