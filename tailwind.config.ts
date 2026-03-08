@@ -51,6 +51,11 @@ export default {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+        fpl: {
+          positive: "hsl(var(--fpl-positive))",
+          negative: "hsl(var(--fpl-negative))",
+          highlight: "hsl(var(--fpl-highlight))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

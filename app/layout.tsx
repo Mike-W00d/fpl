@@ -10,8 +10,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "FPL",
-  description: "Fantasy Premier League tracker",
+  title: "FplTablePro",
+  description: "Fantasy Premier League tracker powered by FplTablePro",
 };
 
 const geistSans = Geist({

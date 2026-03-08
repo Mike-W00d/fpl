@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { LogoutButton } from "@/components/logout-button";
 
 export const metadata: Metadata = {
-  title: "Get Started — FPL",
+  title: "Get Started — FplTablePro",
   description: "Link your FPL account to get started",
 };
 

@@ -9,7 +9,6 @@ import {
   UserPlus,
   Trophy,
   User,
-  Settings,
   LogOut,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
@@ -28,9 +27,10 @@ const unauthenticatedItems = [
 ];
 
 const authenticatedItems = [
+  { href: "/", label: "Home", icon: Home },
+  { href: "/about", label: "About", icon: Info },
   { href: "/leagues", label: "Leagues", icon: Trophy },
   { href: "/account", label: "Account", icon: User },
-  { href: "/settings", label: "Settings", icon: Settings },
 ];
 
 export function MobileBottomNav({ isAuthenticated }: MobileBottomNavProps) {

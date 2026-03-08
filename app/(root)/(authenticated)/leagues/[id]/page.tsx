@@ -55,7 +55,7 @@ async function LeagueContent({ id }: { id: string }) {
           No standings available yet.
         </p>
       ) : (
-        <LeagueTabs standings={standings} leagueId={id} />
+        <LeagueTabs standings={standings} leagueId={id} totalEntrants={league.total_entrants} />
       )}
     </div>
   );

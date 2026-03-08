@@ -148,41 +148,41 @@ export default function GameweekHistoryTable({
         </p>
       )}
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto shadow-md rounded-lg p-4 bg-card">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b">
-              <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 pr-4 tabular-nums w-16">
-                Rank
+              <th className="text-left text-xs uppercase tracking-wide text-muted-foreground py-3 pr-2 tabular-nums w-8">
+                Pos
               </th>
-              <th className="text-left text-xs uppercase tracking-wide text-muted-foreground py-3 px-4">
+              <th className="text-left text-xs uppercase tracking-wide text-muted-foreground py-3 px-2 sm:px-4">
                 Team
               </th>
-              <th className="text-left text-xs uppercase tracking-wide text-muted-foreground py-3 px-4">
+              <th className="text-left text-xs uppercase tracking-wide text-muted-foreground py-3 px-2 sm:px-4 max-w-[120px] sm:max-w-none truncate">
                 Manager
               </th>
-              <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 px-4 tabular-nums">
+              <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 px-2 sm:px-4 tabular-nums">
                 Pts
               </th>
-              <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 px-4 tabular-nums">
+              <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 px-2 sm:px-4 tabular-nums">
                 GW Rank
               </th>
-              <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 px-4 tabular-nums">
+              <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 px-2 sm:px-4 tabular-nums">
                 OR
               </th>
-              <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 px-4 tabular-nums">
+              <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 px-2 sm:px-4 tabular-nums">
                 Bank
               </th>
-              <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 px-4 tabular-nums">
+              <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 px-2 sm:px-4 tabular-nums">
                 Value
               </th>
-              <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 px-4 tabular-nums">
-                TF
+              <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 px-2 sm:px-4 tabular-nums">
+                TM
               </th>
-              <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 px-4 tabular-nums">
+              <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 px-2 sm:px-4 tabular-nums">
                 TC
               </th>
-              <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 pl-4 tabular-nums">
+              <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 pl-2 sm:pl-4 tabular-nums">
                 PoB
               </th>
             </tr>
@@ -201,35 +201,35 @@ export default function GameweekHistoryTable({
                     key={row.entry}
                     className="border-b last:border-0 even:bg-muted/50 hover:bg-accent/50 transition-colors"
                   >
-                    <td className="py-3 pr-4 text-right tabular-nums text-muted-foreground">
+                    <td className="py-3 pr-2 text-left tabular-nums text-muted-foreground">
                       {i + 1}
                     </td>
-                    <td className="py-3 px-4 font-medium">{row.entry_name}</td>
-                    <td className="py-3 px-4 text-muted-foreground">
+                    <td className="py-3 px-2 sm:px-4 font-medium">{row.entry_name}</td>
+                    <td className="py-3 px-2 sm:px-4 text-muted-foreground max-w-[120px] sm:max-w-none truncate">
                       {row.player_name}
                     </td>
-                    <td className="py-3 px-4 text-right tabular-nums font-semibold">
+                    <td className="py-3 px-2 sm:px-4 text-right tabular-nums font-semibold">
                       {row.total_points.toLocaleString()}
                     </td>
-                    <td className="py-3 px-4 text-right tabular-nums">
+                    <td className="py-3 px-2 sm:px-4 text-right tabular-nums">
                       {row.gw_rank.toLocaleString()}
                     </td>
-                    <td className="py-3 px-4 text-right tabular-nums">
+                    <td className="py-3 px-2 sm:px-4 text-right tabular-nums">
                       {row.overall_rank.toLocaleString()}
                     </td>
-                    <td className="py-3 px-4 text-right tabular-nums">
+                    <td className="py-3 px-2 sm:px-4 text-right tabular-nums">
                       {formatMoney(row.bank)}
                     </td>
-                    <td className="py-3 px-4 text-right tabular-nums">
+                    <td className="py-3 px-2 sm:px-4 text-right tabular-nums">
                       {formatMoney(row.value)}
                     </td>
-                    <td className="py-3 px-4 text-right tabular-nums">
+                    <td className="py-3 px-2 sm:px-4 text-right tabular-nums">
                       {row.transfers}
                     </td>
-                    <td className="py-3 px-4 text-right tabular-nums">
+                    <td className="py-3 px-2 sm:px-4 text-right tabular-nums">
                       {row.transfer_cost > 0 ? `-${row.transfer_cost}` : 0}
                     </td>
-                    <td className="py-3 pl-4 text-right tabular-nums">
+                    <td className="py-3 pl-2 sm:pl-4 text-right tabular-nums">
                       {row.points_on_bench}
                     </td>
                   </tr>

@@ -18,9 +18,10 @@ const unauthenticatedLinks = [
 ];
 
 const authenticatedLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "/leagues", label: "My Leagues" },
   { href: "/account", label: "My Account" },
-  { href: "/settings", label: "Settings" },
 ];
 
 export function DesktopTopNav({ isAuthenticated }: DesktopTopNavProps) {
@@ -40,7 +41,7 @@ export function DesktopTopNav({ isAuthenticated }: DesktopTopNavProps) {
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
         <div className="flex items-center gap-6">
           <Link href="/" className="text-lg font-semibold">
-            FPL
+            FplTablePro
           </Link>
           <div className="flex items-center gap-4">
             {links.map((link) => {

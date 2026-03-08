@@ -1,9 +1,11 @@
 import { z } from "zod";
 import { EntryHistorySchema } from "./schemas/entryHistory";
 import { EntrySummarySchema } from "./schemas/entrySummary";
+import { BootstrapStaticSchema } from "./schemas/gameweeksSchema";
 import { LeagueStandingsResponseSchema } from "./schemas/leagueStandings";
 
 const schemas = {
+  bootstrapStatic: BootstrapStaticSchema,
   entryHistory: EntryHistorySchema,
   entrySummary: EntrySummarySchema,
   leagueStandings: LeagueStandingsResponseSchema,

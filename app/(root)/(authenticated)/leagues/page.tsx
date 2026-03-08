@@ -39,7 +39,7 @@ async function LeaguesContent() {
           has been synced.
         </p>
       ) : (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto shadow-md rounded-lg p-4 bg-card">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b">
