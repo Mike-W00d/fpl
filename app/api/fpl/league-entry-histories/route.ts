@@ -5,14 +5,14 @@ export async function GET(request: NextRequest) {
   const leagueId = request.nextUrl.searchParams.get("leagueId");
   const page = request.nextUrl.searchParams.get("page") ?? "1";
 
-  if (!leagueId || !/^\d+$/.test(leagueId)) {
+  if (!leagueId || !/^\d+$/.test(leagueId) || Number(leagueId) > 100_000_000) {
     return NextResponse.json(
       { error: "A valid numeric leagueId is required" },
       { status: 400 },
     );
   }
 
-  if (!/^\d+$/.test(page)) {
+  if (!/^\d+$/.test(page) || Number(page) > 1000) {
     return NextResponse.json(
       { error: "page must be a positive integer" },
       { status: 400 },
@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
   // Step 1: Fetch league standings
   const standingsRes = await fetch(
     `https://fantasy.premierleague.com/api/leagues-classic/${leagueId}/standings/?page_standings=${page}&phase=1`,
-    { next: { revalidate: 300 } },
+    { next: { revalidate: 300 }, signal: AbortSignal.timeout(10_000) },
   );
 
   if (!standingsRes.ok) {
@@ -57,7 +57,7 @@ export async function GET(request: NextRequest) {
   const historyPromises = results.map(async (result) => {
     const res = await fetch(
       `https://fantasy.premierleague.com/api/entry/${result.entry}/history/`,
-      { next: { revalidate: 300 } },
+      { next: { revalidate: 300 }, signal: AbortSignal.timeout(10_000) },
     );
 
     if (!res.ok) {

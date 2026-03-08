@@ -3,6 +3,7 @@
 import type { StandingResult } from "@/lib/zod/schemas/leagueStandings";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import GameweekHistoryTable from "./gameweek-history-table";
+import AwardsSection from "./awards-section";
 
 const MAX_ENTRANTS_FOR_DETAIL = 50;
 
@@ -91,9 +92,7 @@ export default function LeagueTabs({
             Awards are only available for leagues with {MAX_ENTRANTS_FOR_DETAIL} or fewer members.
           </p>
         ) : (
-          <p className="text-muted-foreground text-sm py-12 text-center">
-            Coming soon
-          </p>
+          <AwardsSection leagueId={leagueId} standings={standings} />
         )}
       </TabsContent>
     </Tabs>

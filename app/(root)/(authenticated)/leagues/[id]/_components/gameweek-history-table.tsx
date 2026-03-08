@@ -43,10 +43,13 @@ export default function GameweekHistoryTable({
   const [selectedGw, setSelectedGw] = useState<number | "overall">("overall");
 
   useEffect(() => {
+    const controller = new AbortController();
+
     async function fetchHistories() {
       try {
         const res = await fetch(
           `/api/fpl/league-entry-histories?leagueId=${leagueId}`,
+          { signal: controller.signal },
         );
         if (!res.ok) {
           const body = await res.json().catch(() => null);
@@ -55,13 +58,15 @@ export default function GameweekHistoryTable({
         const json: ApiResponse = await res.json();
         setData(json);
       } catch (err) {
+        if (err instanceof DOMException && err.name === "AbortError") return;
         setError(err instanceof Error ? err.message : "Something went wrong");
       } finally {
-        setIsLoading(false);
+        if (!controller.signal.aborted) setIsLoading(false);
       }
     }
 
     fetchHistories();
+    return () => controller.abort();
   }, [leagueId]);
 
   // Derive available gameweeks from first entry

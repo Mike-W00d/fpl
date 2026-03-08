@@ -25,6 +25,7 @@ export function validate<T extends EndpointName>(
     const formatted = result.error.issues
       .map((i) => `${i.path.join(".")}: ${i.message}`)
       .join("; ");
+    console.error(`Validation failed for "${endpoint}": ${formatted}`);
     throw new Error(`Validation failed for "${endpoint}": ${formatted}`);
   }
 

@@ -8,13 +8,13 @@ import LeagueTabs from "./_components/league-tabs";
 async function LeagueContent({ id }: { id: string }) {
   const { supabase } = await requireFplAccount();
 
-  const { data: league } = await supabase
+  const { data: league, error: leagueError } = await supabase
     .from("leagues")
     .select("league_id, name, total_entrants, scoring_type")
     .eq("league_id", Number(id))
     .single();
 
-  if (!league) {
+  if (leagueError || !league) {
     notFound();
   }
 
@@ -25,6 +25,7 @@ async function LeagueContent({ id }: { id: string }) {
   try {
     const res = await fetch(
       `https://fantasy.premierleague.com/api/leagues-classic/${id}/standings/?page_standings=1&phase=1`,
+      { signal: AbortSignal.timeout(10_000) },
     );
 
     if (res.ok) {

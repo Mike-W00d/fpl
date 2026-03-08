@@ -10,8 +10,12 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "FplTablePro",
-  description: "Fantasy Premier League tracker powered by FplTablePro",
+  title: {
+    default: "FplTablePro — Fantasy Premier League Analytics & League Tracker",
+    template: "%s | FplTablePro",
+  },
+  description:
+    "Track your Fantasy Premier League mini-league standings, analyse gameweek history, compare FPL managers, and unlock awards. Free FPL companion for serious fantasy football managers.",
 };
 
 const geistSans = Geist({

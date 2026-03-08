@@ -47,6 +47,14 @@ export function FplTeamForm() {
         <div className="flex flex-col gap-4">
           <div className="grid gap-2">
             <Label htmlFor="teamId">FPL Team ID</Label>
+            <img
+              src="/signup-help.png"
+              alt="Where to find your FPL Team ID"
+              className="rounded-lg border"
+            />
+            <p className="text-sm text-muted-foreground">
+              In this example, the Team ID would be <span className="font-semibold text-foreground">222445</span>
+            </p>
             <Input
               id="teamId"
               type="text"

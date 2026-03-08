@@ -4,7 +4,7 @@ import { validate } from "@/lib/zod/validation";
 export async function GET(request: NextRequest) {
   const teamId = request.nextUrl.searchParams.get("teamId");
 
-  if (!teamId || !/^\d+$/.test(teamId)) {
+  if (!teamId || !/^\d+$/.test(teamId) || Number(teamId) > 100_000_000) {
     return NextResponse.json(
       { error: "A valid numeric Team ID is required" },
       { status: 400 },
@@ -13,6 +13,7 @@ export async function GET(request: NextRequest) {
 
   const res = await fetch(
     `https://fantasy.premierleague.com/api/entry/${teamId}/`,
+    { signal: AbortSignal.timeout(10_000) },
   );
 
   if (!res.ok) {
