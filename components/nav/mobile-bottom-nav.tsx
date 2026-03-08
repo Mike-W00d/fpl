@@ -28,7 +28,6 @@ const unauthenticatedItems = [
 ];
 
 const authenticatedItems = [
-  { href: "/", label: "Home", icon: Home },
   { href: "/leagues", label: "Leagues", icon: Trophy },
   { href: "/account", label: "Account", icon: User },
   { href: "/settings", label: "Settings", icon: Settings },
@@ -41,7 +40,6 @@ export function MobileBottomNav({ isAuthenticated }: MobileBottomNavProps) {
   const handleSignOut = async () => {
     const supabase = createClient();
     await supabase.auth.signOut();
-    router.refresh();
     router.push("/auth/login");
   };
 

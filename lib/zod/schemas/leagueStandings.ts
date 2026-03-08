@@ -66,3 +66,5 @@ const LeagueStandingsResponseSchema = z.object({
 });
 
 export { LeagueStandingsResponseSchema };
+
+export type StandingResult = z.infer<typeof StandingResultSchema>;

@@ -18,7 +18,6 @@ const unauthenticatedLinks = [
 ];
 
 const authenticatedLinks = [
-  { href: "/", label: "Home" },
   { href: "/leagues", label: "My Leagues" },
   { href: "/account", label: "My Account" },
   { href: "/settings", label: "Settings" },
@@ -31,7 +30,6 @@ export function DesktopTopNav({ isAuthenticated }: DesktopTopNavProps) {
   const handleSignOut = async () => {
     const supabase = createClient();
     await supabase.auth.signOut();
-    router.refresh();
     router.push("/auth/login");
   };
 
