@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FplTeamForm } from "./_components/fpl-team-form";
+import { FplTeamForm } from "@/components/fpl-team-form";
 
 async function GetStartedContent() {
   const supabase = await createClient();

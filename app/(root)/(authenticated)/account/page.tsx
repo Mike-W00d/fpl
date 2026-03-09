@@ -6,43 +6,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { ConnectAccountSection } from "./_components/connect-account-section";
 
 async function AccountContent() {
   const { user, supabase } = await requireFplAccount();
 
-  const [{ data: account }, { data: profile }] = await Promise.all([
+  const [{ data: accounts }, { data: profile }] = await Promise.all([
     supabase
       .from("fpl_accounts")
       .select("*")
       .eq("user_id", user.id)
-      .single(),
+      .order("created_at", { ascending: true }),
     supabase.from("profiles").select("*").eq("id", user.id).single(),
   ]);
-
-  const details = [
-    {
-      label: "Display Name",
-      value: profile?.display_name ?? "—",
-    },
-    {
-      label: "Player Name",
-      value: account?.player_name ?? "—",
-    },
-    {
-      label: "FPL Team ID",
-      value: account?.fpl_team_id,
-    },
-    {
-      label: "Account Created",
-      value: account?.created_at
-        ? new Date(account.created_at).toLocaleDateString("en-GB", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          })
-        : "—",
-    },
-  ];
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12">
@@ -51,24 +27,73 @@ async function AccountContent() {
         Your profile and linked FPL account details.
       </p>
 
-      <Card className="max-w-lg">
-        <CardHeader>
-          <CardTitle>Account Details</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <dl className="space-y-4">
-            {details.map((item) => (
-              <div
-                key={item.label}
-                className="flex items-center justify-between"
-              >
-                <dt className="text-sm text-muted-foreground">{item.label}</dt>
-                <dd className="font-semibold tabular-nums">{item.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </CardContent>
-      </Card>
+      {profile && (
+        <Card className="max-w-lg mb-6">
+          <CardHeader>
+            <CardTitle>Profile</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center justify-between">
+              <dt className="text-sm text-muted-foreground">Display Name</dt>
+              <dd className="font-semibold">{profile.display_name ?? "—"}</dd>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      <h2 className="text-xl font-semibold tracking-tight mb-4">
+        Linked FPL Accounts
+      </h2>
+
+      <div className="flex flex-col gap-4 max-w-lg mb-6">
+        {accounts && accounts.length > 0 ? (
+          accounts.map((account) => (
+            <Card key={account.id}>
+              <CardContent className="pt-6">
+                <dl className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <dt className="text-sm text-muted-foreground">
+                      Player Name
+                    </dt>
+                    <dd className="font-semibold">
+                      {account.player_name ?? "—"}
+                    </dd>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <dt className="text-sm text-muted-foreground">
+                      FPL Team ID
+                    </dt>
+                    <dd className="font-semibold tabular-nums">
+                      {account.fpl_team_id}
+                    </dd>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <dt className="text-sm text-muted-foreground">Linked</dt>
+                    <dd className="text-sm tabular-nums">
+                      {account.created_at
+                        ? new Date(account.created_at).toLocaleDateString(
+                            "en-GB",
+                            {
+                              day: "numeric",
+                              month: "long",
+                              year: "numeric",
+                            },
+                          )
+                        : "—"}
+                    </dd>
+                  </div>
+                </dl>
+              </CardContent>
+            </Card>
+          ))
+        ) : (
+          <p className="text-sm text-muted-foreground">
+            No FPL accounts linked yet.
+          </p>
+        )}
+      </div>
+
+      <ConnectAccountSection />
     </div>
   );
 }

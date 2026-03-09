@@ -7,9 +7,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import type { EntrySummary } from "@/lib/zod/schemas/entrySummary";
-import { linkFplAccount } from "../_actions/link-fpl-account";
+import { linkFplAccount } from "@/app/_actions/link-fpl-account";
 
-export function FplTeamForm() {
+interface FplTeamFormProps {
+  onSuccess?: () => void;
+  compact?: boolean;
+}
+
+export function FplTeamForm({ onSuccess, compact }: FplTeamFormProps) {
   const [teamId, setTeamId] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -47,14 +52,18 @@ export function FplTeamForm() {
         <div className="flex flex-col gap-4">
           <div className="grid gap-2">
             <Label htmlFor="teamId">FPL Team ID</Label>
-            <img
-              src="/signup-help.png"
-              alt="Where to find your FPL Team ID"
-              className="rounded-lg border"
-            />
-            <p className="text-sm text-muted-foreground">
-              In this example, the Team ID would be <span className="font-semibold text-foreground">222445</span>
-            </p>
+            {!compact && (
+              <>
+                <img
+                  src="/signup-help.png"
+                  alt="Where to find your FPL Team ID"
+                  className="rounded-lg border"
+                />
+                <p className="text-sm text-muted-foreground">
+                  In this example, the Team ID would be <span className="font-semibold text-foreground">222445</span>
+                </p>
+              </>
+            )}
             <Input
               id="teamId"
               type="text"
@@ -120,6 +129,8 @@ export function FplTeamForm() {
             if ("error" in result) {
               setError(result.error ?? "An unexpected error occurred");
               setIsLinking(false);
+            } else if (onSuccess) {
+              onSuccess();
             } else {
               router.push("/leagues");
             }

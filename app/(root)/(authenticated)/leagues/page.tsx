@@ -8,23 +8,37 @@ async function LeaguesContent() {
   const { data: accounts } = await supabase
     .from("fpl_accounts")
     .select("id")
-    .eq("user_id", user.id)
-    .limit(1);
+    .eq("user_id", user.id);
+
+  const accountIds = accounts?.map((a) => a.id) ?? [];
 
   const { data: leagueRows } = await supabase
     .from("fpl_account_leagues")
     .select("league_id, current_rank, leagues(league_id, name, total_entrants)")
-    .eq("fpl_account_id", accounts![0].id);
+    .in("fpl_account_id", accountIds);
 
-  const leagues =
-    leagueRows
-      ?.map((row) => {
-        const l = row.leagues;
-        // Supabase may type the join as array or object; normalise to object
-        const league = Array.isArray(l) ? l[0] : l;
-        return league ? { ...league, current_rank: row.current_rank } : null;
-      })
-      .filter(Boolean) ?? [];
+  // Deduplicate leagues across accounts — keep the best (lowest) rank
+  const leagueMap = new Map<
+    number,
+    { league_id: number; name: string; total_entrants: number; current_rank: number | null }
+  >();
+
+  for (const row of leagueRows ?? []) {
+    const l = row.leagues;
+    const league = Array.isArray(l) ? l[0] : l;
+    if (!league) continue;
+
+    const existing = leagueMap.get(league.league_id);
+    if (
+      !existing ||
+      (row.current_rank !== null &&
+        (existing.current_rank === null || row.current_rank < existing.current_rank))
+    ) {
+      leagueMap.set(league.league_id, { ...league, current_rank: row.current_rank });
+    }
+  }
+
+  const leagues = Array.from(leagueMap.values());
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12">
@@ -57,23 +71,23 @@ async function LeaguesContent() {
             <tbody>
               {leagues.map((league) => (
                 <tr
-                  key={league!.league_id}
+                  key={league.league_id}
                   className="border-b last:border-0 even:bg-muted/50 hover:bg-accent/50 transition-colors"
                 >
                   <td className="py-3 pr-4">
                     <Link
-                      href={`/leagues/${league!.league_id}`}
+                      href={`/leagues/${league.league_id}`}
                       className="font-medium hover:underline"
                     >
-                      {league!.name}
+                      {league.name}
                     </Link>
                   </td>
                   <td className="py-3 px-4 text-right tabular-nums">
-                    {league!.total_entrants.toLocaleString()}
+                    {league.total_entrants.toLocaleString()}
                   </td>
                   <td className="py-3 pl-4 text-right tabular-nums">
-                    {league!.current_rank
-                      ? `#${league!.current_rank.toLocaleString()}`
+                    {league.current_rank
+                      ? `#${league.current_rank.toLocaleString()}`
                       : <span className="text-muted-foreground">&mdash;</span>}
                   </td>
                 </tr>
