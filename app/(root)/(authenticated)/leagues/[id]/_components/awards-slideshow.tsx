@@ -159,7 +159,7 @@ export default function AwardsSlideshow({
                 shareButton={
                   i === currentSlide ? (
                     <ShareAward
-                      slideRef={{ current: slideRefs.current[i] }}
+                      getSlideElement={() => slideRefs.current[i]}
                       awardName={award.id}
                     />
                   ) : undefined

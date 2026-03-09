@@ -5,7 +5,7 @@ import { Share2, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type ShareAwardProps = {
-  slideRef: React.RefObject<HTMLDivElement | null>;
+  getSlideElement: () => HTMLDivElement | null;
   awardName: string;
 };
 
@@ -17,11 +17,12 @@ function supportsNativeShare(): boolean {
   );
 }
 
-export default function ShareAward({ slideRef, awardName }: ShareAwardProps) {
+export default function ShareAward({ getSlideElement, awardName }: ShareAwardProps) {
   const [isCapturing, setIsCapturing] = useState(false);
 
   const capture = useCallback(async () => {
-    if (!slideRef.current || isCapturing) return;
+    const el = getSlideElement();
+    if (!el || isCapturing) return;
 
     setIsCapturing(true);
     try {
@@ -29,7 +30,7 @@ export default function ShareAward({ slideRef, awardName }: ShareAwardProps) {
 
       // Check for native sharing support with files
       if (supportsNativeShare()) {
-        const blob = await toBlob(slideRef.current, {
+        const blob = await toBlob(el, {
           cacheBust: true,
           backgroundColor: "#000000",
           filter: (node) => !node.hasAttribute?.("data-share-button"),
@@ -50,7 +51,7 @@ export default function ShareAward({ slideRef, awardName }: ShareAwardProps) {
       }
 
       // Fallback: download as PNG
-      const dataUrl = await toPng(slideRef.current, {
+      const dataUrl = await toPng(el, {
         cacheBust: true,
         backgroundColor: "#000000",
         filter: (node) => !node.hasAttribute?.("data-share-button"),
@@ -59,12 +60,16 @@ export default function ShareAward({ slideRef, awardName }: ShareAwardProps) {
       link.download = `${awardName}.png`;
       link.href = dataUrl;
       link.click();
-    } catch {
-      // User cancelled share or capture failed — silent
+    } catch (error) {
+      // Silence user cancellation (e.g. dismissing the share sheet)
+      if (error instanceof DOMException && (error.name === "AbortError" || error.name === "NotAllowedError")) {
+        return;
+      }
+      console.error("Failed to capture/share award:", error);
     } finally {
       setIsCapturing(false);
     }
-  }, [slideRef, awardName, isCapturing]);
+  }, [getSlideElement, awardName, isCapturing]);
 
   const isNative = supportsNativeShare();
 

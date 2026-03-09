@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { Analytics } from "@vercel/analytics/next";
 import { AuthListener } from "@/components/nav/auth-listener";
 import "./globals.css";
 
@@ -41,6 +42,7 @@ export default function RootLayout({
           <AuthListener />
           {children}
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
