@@ -9,7 +9,7 @@ function stdDev(values: number[]): number {
 
 export const awardDefinitions: AwardDefinition[] = [
   {
-    id: "big-hitter",
+    id: "the-chef",
     name: "The Chef",
     emoji: "💥",
     image: "chef.jpg",
@@ -34,7 +34,7 @@ export const awardDefinitions: AwardDefinition[] = [
       if (!best) return null;
 
       return {
-        id: "big-hitter",
+        id: "the-chef",
         name: "The Chef",
         emoji: "💥",
         image: "chef.jpg",
@@ -58,7 +58,7 @@ export const awardDefinitions: AwardDefinition[] = [
   },
 
   {
-    id: "wooden-spoon",
+    id: "the-liz-truss",
     name: "The Liz Truss",
     emoji: "🥬",
     image: "the-lizz-truss.webp",
@@ -83,7 +83,7 @@ export const awardDefinitions: AwardDefinition[] = [
       if (!worst) return null;
 
       return {
-        id: "wooden-spoon",
+        id: "the-liz-truss",
         name: "The Liz Truss",
         emoji: "🥬",
         image: "the-lizz-truss.webp",
@@ -107,7 +107,7 @@ export const awardDefinitions: AwardDefinition[] = [
   },
 
   {
-    id: "bench-warmer",
+    id: "the-burnley-at-home",
     name: "The Burnley At Home",
     emoji: "🪑",
     image: "the-burnley.jpg",
@@ -128,7 +128,7 @@ export const awardDefinitions: AwardDefinition[] = [
       if (!best || best.total === 0) return null;
 
       return {
-        id: "bench-warmer",
+        id: "the-burnley-at-home",
         name: "The Burnley At Home",
         emoji: "🪑",
         image: "the-burnley.jpg",
@@ -152,7 +152,7 @@ export const awardDefinitions: AwardDefinition[] = [
   },
 
   {
-    id: "transfer-addict",
+    id: "the-tinder-swindler",
     name: "The Tinder Swindler",
     emoji: "🔄",
     image: "the-tinder-swindler.webp",
@@ -173,7 +173,7 @@ export const awardDefinitions: AwardDefinition[] = [
       if (!best || best.total === 0) return null;
 
       return {
-        id: "transfer-addict",
+        id: "the-tinder-swindler",
         name: "The Tinder Swindler",
         emoji: "🔄",
         image: "the-tinder-swindler.webp",
@@ -197,7 +197,7 @@ export const awardDefinitions: AwardDefinition[] = [
   },
 
   {
-    id: "hit-taker",
+    id: "the-jake-paul",
     name: "The Jake Paul",
     emoji: "🎯",
     image: "jake-paul.webp",
@@ -218,7 +218,7 @@ export const awardDefinitions: AwardDefinition[] = [
       if (!best || best.total === 0) return null;
 
       return {
-        id: "hit-taker",
+        id: "the-jake-paul",
         name: "The Jake Paul",
         emoji: "🎯",
         image: "jake-paul.webp",
@@ -242,7 +242,7 @@ export const awardDefinitions: AwardDefinition[] = [
   },
 
   {
-    id: "consistency-king",
+    id: "the-arsenal-corner",
     name: "The Arsenal Corner",
     emoji: "📏",
     image: "arsenal-corner.jpg",
@@ -262,7 +262,7 @@ export const awardDefinitions: AwardDefinition[] = [
       const second = entries[1];
 
       return {
-        id: "consistency-king",
+        id: "the-arsenal-corner",
         name: "The Arsenal Corner",
         emoji: "📏",
         image: "arsenal-corner.jpg",
@@ -286,7 +286,7 @@ export const awardDefinitions: AwardDefinition[] = [
   },
 
   {
-    id: "on-the-rise",
+    id: "the-jordan-belfort",
     name: "The Jordan Belfort",
     emoji: "📈",
     image: "the-jordan-belfort.jpg",
@@ -314,7 +314,7 @@ export const awardDefinitions: AwardDefinition[] = [
       if (best.increase <= 0) return null;
 
       return {
-        id: "on-the-rise",
+        id: "the-jordan-belfort",
         name: "The Jordan Belfort",
         emoji: "📈",
         image: "the-jordan-belfort.jpg",
@@ -338,7 +338,7 @@ export const awardDefinitions: AwardDefinition[] = [
   },
 
   {
-    id: "money-hoarder",
+    id: "the-george-osborne",
     name: "The George Osborne",
     emoji: "💰",
     image: "the-george-osborne.jpg",
@@ -359,7 +359,7 @@ export const awardDefinitions: AwardDefinition[] = [
       const second = entries[1];
 
       return {
-        id: "money-hoarder",
+        id: "the-george-osborne",
         name: "The George Osborne",
         emoji: "💰",
         image: "the-george-osborne.jpg",
@@ -384,7 +384,7 @@ export const awardDefinitions: AwardDefinition[] = [
   },
 
   {
-    id: "chip-timing-disaster",
+    id: "the-gary-neville",
     name: "The Gary Neville",
     emoji: "💀",
 
@@ -442,7 +442,7 @@ export const awardDefinitions: AwardDefinition[] = [
       if (!worst) return null;
 
       return {
-        id: "chip-timing-disaster",
+        id: "the-gary-neville",
         name: "The Gary Neville",
         emoji: "💀",
         image: "the-gary-neville.jpg",
@@ -466,7 +466,7 @@ export const awardDefinitions: AwardDefinition[] = [
   },
 
   {
-    id: "chip-master",
+    id: "the-jose-mourinho",
     name: "The Jose Mourinho",
     emoji: "🏆",
     image: "the-jose.webp",
@@ -523,7 +523,7 @@ export const awardDefinitions: AwardDefinition[] = [
       if (!best) return null;
 
       return {
-        id: "chip-master",
+        id: "the-jose-mourinho",
         name: "The Jose Mourinho",
         emoji: "🏆",
         image: "the-jose.webp",
@@ -548,7 +548,7 @@ export const awardDefinitions: AwardDefinition[] = [
   },
 
   {
-    id: "weekend-at-bernies",
+    id: "the-weekend-at-bernies",
     name: "The Weekend At Bernies",
     emoji: "🏖️",
     image: "weekend-at-bernies.gif",
@@ -575,7 +575,7 @@ export const awardDefinitions: AwardDefinition[] = [
       if (!best) return null;
 
       return {
-        id: "weekend-at-bernies",
+        id: "the-weekend-at-bernies",
         name: "The Weekend At Bernies",
         emoji: "🏖️",
         image: "weekend-at-bernies.gif",
@@ -600,7 +600,7 @@ export const awardDefinitions: AwardDefinition[] = [
   },
 
   {
-    id: "titanic",
+    id: "the-bottle-job",
     name: "The Bottle Job",
     emoji: "🚢",
     image: "the-bottle-job.jpg",
@@ -665,7 +665,7 @@ export const awardDefinitions: AwardDefinition[] = [
       const second = drops[1];
 
       return {
-        id: "titanic",
+        id: "the-bottle-job",
         name: "The Bottle Job",
         emoji: "🚢",
         image: "the-bottle-job.jpg",
