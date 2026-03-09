@@ -31,6 +31,7 @@ export default function ShareAward({ slideRef, awardName }: ShareAwardProps) {
       if (supportsNativeShare()) {
         const blob = await toBlob(slideRef.current, {
           cacheBust: true,
+          backgroundColor: "#000000",
           filter: (node) => !node.hasAttribute?.("data-share-button"),
         });
         if (!blob) return;
@@ -51,6 +52,7 @@ export default function ShareAward({ slideRef, awardName }: ShareAwardProps) {
       // Fallback: download as PNG
       const dataUrl = await toPng(slideRef.current, {
         cacheBust: true,
+        backgroundColor: "#000000",
         filter: (node) => !node.hasAttribute?.("data-share-button"),
       });
       const link = document.createElement("a");

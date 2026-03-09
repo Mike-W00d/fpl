@@ -10,14 +10,16 @@ type AwardsSlideshowProps = {
   awards: AwardResult[];
   onClose: () => void;
   onSeen?: (awardId: string) => void;
+  initialSlide?: number;
 };
 
 export default function AwardsSlideshow({
   awards,
   onClose,
   onSeen,
+  initialSlide,
 }: AwardsSlideshowProps) {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(initialSlide ?? 0);
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
 

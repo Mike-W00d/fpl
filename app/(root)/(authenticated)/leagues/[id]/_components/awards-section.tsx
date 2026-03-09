@@ -34,7 +34,7 @@ export default function AwardsSection({
   const [awards, setAwards] = useState<AwardResult[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [showSlideshow, setShowSlideshow] = useState(false);
+  const [slideshowStartIndex, setSlideshowStartIndex] = useState<number | null>(null);
   const [seenAwardIds, setSeenAwardIds] = useState<Set<string>>(new Set());
 
   const storageKey = `fpl-awards-seen-${leagueId}`;
@@ -126,7 +126,7 @@ export default function AwardsSection({
     <>
       <div className="p-4 space-y-4">
         <div className="flex justify-center">
-          <Button onClick={() => setShowSlideshow(true)} className="gap-2">
+          <Button onClick={() => setSlideshowStartIndex(0)} className="gap-2">
             <Trophy size={16} />
             View Awards
           </Button>
@@ -141,7 +141,14 @@ export default function AwardsSection({
                 className={`p-3 flex flex-col items-center text-center gap-1 hover:bg-accent/50 transition-colors cursor-pointer ${
                   !seen ? "opacity-75" : ""
                 }`}
-                onClick={() => setShowSlideshow(true)}
+                onClick={() => {
+                  const allSeen = awards.every((a) => seenAwardIds.has(a.id));
+                  if (allSeen && seen) {
+                    setSlideshowStartIndex(awards.findIndex((a) => a.id === award.id));
+                  } else {
+                    setSlideshowStartIndex(0);
+                  }
+                }}
               >
                 {award.image ? (
                   <img
@@ -181,11 +188,12 @@ export default function AwardsSection({
         </div>
       </div>
 
-      {showSlideshow && (
+      {slideshowStartIndex !== null && (
         <AwardsSlideshow
           awards={awards}
-          onClose={() => setShowSlideshow(false)}
+          onClose={() => setSlideshowStartIndex(null)}
           onSeen={handleSeen}
+          initialSlide={slideshowStartIndex}
         />
       )}
     </>
