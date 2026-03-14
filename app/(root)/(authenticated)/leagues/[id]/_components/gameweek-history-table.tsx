@@ -217,7 +217,7 @@ export default function GameweekHistoryTable({
                       {row.total_points.toLocaleString()}
                     </td>
                     <td className="py-3 px-2 sm:px-4 text-right tabular-nums">
-                      {row.gw_rank.toLocaleString()}
+                      {row.gw_rank?.toLocaleString() ?? "-"}
                     </td>
                     <td className="py-3 px-2 sm:px-4 text-right tabular-nums">
                       {row.overall_rank.toLocaleString()}
@@ -251,7 +251,7 @@ type Row = {
   entry_name: string;
   player_name: string;
   total_points: number;
-  gw_rank: number;
+  gw_rank: number | null;
   overall_rank: number;
   bank: number;
   value: number;
@@ -281,7 +281,7 @@ function buildRows(
           entry_name: e.entry_name,
           player_name: e.player_name,
           total_points: latest?.total_points ?? 0,
-          gw_rank: latest?.rank ?? 0,
+          gw_rank: latest?.rank ?? null,
           overall_rank: latest?.overall_rank ?? 0,
           bank: current.length > 0
             ? Math.round(sum(current, (gw) => gw.bank) / current.length)
@@ -308,7 +308,7 @@ function buildRows(
         entry_name: e.entry_name,
         player_name: e.player_name,
         total_points: gw?.total_points ?? 0,
-        gw_rank: gw?.rank ?? 0,
+        gw_rank: gw?.rank ?? null,
         overall_rank: gw?.overall_rank ?? 0,
         bank: gw?.bank ?? 0,
         value: gw?.value ?? 0,
