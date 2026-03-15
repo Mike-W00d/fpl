@@ -8,9 +8,9 @@ const CurrentGameweekSchema = z.object({
   points: z.number(),
   total_points: z.number(),
   rank: z.number().nullable(),
-  rank_sort: z.number().nullable(),
+  rank_sort: z.number().nullable().optional(),
   overall_rank: z.number(),
-  percentile_rank: z.number().nullable(),
+  percentile_rank: z.number().nullable().optional(),
   bank: z.number(),
   value: z.number(),
   event_transfers: z.number(),
@@ -20,15 +20,15 @@ const CurrentGameweekSchema = z.object({
 
 // Past season summary
 const PastSeasonSchema = z.object({
-  season_name: z.string(),
-  total_points: z.number(),
-  rank: z.number(),
+  season_name: z.string().nullable().optional(),
+  total_points: z.number().nullable().optional(),
+  rank: z.number().nullable().optional(),
 });
 
 // Chip usage
 const ChipSchema = z.object({
-  name: z.string(), // e.g. "wildcard", "3xc", "bboost", "freehit"
-  time: z.string(), // ISO datetime
+  name: z.string(),
+  time: z.string().nullable().optional(),
   event: z.number(),
 });
 

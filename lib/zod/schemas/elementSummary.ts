@@ -1,0 +1,105 @@
+// https://fantasy.premierleague.com/api/element-summary/{{player_id}}/
+
+import { z } from "zod";
+
+const FixtureSchema = z.object({
+  id: z.number().nullable().optional(),
+  code: z.number().nullable().optional(),
+  team_h: z.number().nullable().optional(),
+  team_h_score: z.number().nullable().optional(),
+  team_a: z.number().nullable().optional(),
+  team_a_score: z.number().nullable().optional(),
+  event: z.number().nullable().optional(),
+  finished: z.boolean().nullable().optional(),
+  minutes: z.number().nullable().optional(),
+  provisional_start_time: z.boolean().nullable().optional(),
+  kickoff_time: z.string().nullable().optional(),
+  event_name: z.string().nullable().optional(),
+  is_home: z.boolean().nullable().optional(),
+  difficulty: z.number().nullable().optional(),
+});
+
+const HistorySchema = z.object({
+  element: z.number(),
+  fixture: z.number().nullable().optional(),
+  opponent_team: z.number().nullable().optional(),
+  total_points: z.number(),
+  was_home: z.boolean().nullable().optional(),
+  kickoff_time: z.string().nullable().optional(),
+  team_h_score: z.number().nullable().optional(),
+  team_a_score: z.number().nullable().optional(),
+  round: z.number(),
+  modified: z.boolean().nullable().optional(),
+  minutes: z.number(),
+  goals_scored: z.number().nullable().optional(),
+  assists: z.number().nullable().optional(),
+  clean_sheets: z.number().nullable().optional(),
+  goals_conceded: z.number().nullable().optional(),
+  own_goals: z.number().nullable().optional(),
+  penalties_saved: z.number().nullable().optional(),
+  penalties_missed: z.number().nullable().optional(),
+  yellow_cards: z.number().nullable().optional(),
+  red_cards: z.number().nullable().optional(),
+  saves: z.number().nullable().optional(),
+  bonus: z.number().nullable().optional(),
+  bps: z.number().nullable().optional(),
+  influence: z.string().nullable().optional(),
+  creativity: z.string().nullable().optional(),
+  threat: z.string().nullable().optional(),
+  ict_index: z.string().nullable().optional(),
+  clearances_blocks_interceptions: z.number().nullable().optional(),
+  recoveries: z.number().nullable().optional(),
+  tackles: z.number().nullable().optional(),
+  defensive_contribution: z.number().nullable().optional(),
+  starts: z.number().nullable().optional(),
+  expected_goals: z.string().nullable().optional(),
+  expected_assists: z.string().nullable().optional(),
+  expected_goal_involvements: z.string().nullable().optional(),
+  expected_goals_conceded: z.string().nullable().optional(),
+  value: z.number().nullable().optional(),
+  transfers_balance: z.number().nullable().optional(),
+  selected: z.number().nullable().optional(),
+  transfers_in: z.number().nullable().optional(),
+  transfers_out: z.number().nullable().optional(),
+});
+
+const HistoryPastSchema = z.object({
+  season_name: z.string().nullable().optional(),
+  element_code: z.number().nullable().optional(),
+  start_cost: z.number().nullable().optional(),
+  end_cost: z.number().nullable().optional(),
+  total_points: z.number().nullable().optional(),
+  minutes: z.number().nullable().optional(),
+  goals_scored: z.number().nullable().optional(),
+  assists: z.number().nullable().optional(),
+  clean_sheets: z.number().nullable().optional(),
+  goals_conceded: z.number().nullable().optional(),
+  own_goals: z.number().nullable().optional(),
+  penalties_saved: z.number().nullable().optional(),
+  penalties_missed: z.number().nullable().optional(),
+  yellow_cards: z.number().nullable().optional(),
+  red_cards: z.number().nullable().optional(),
+  saves: z.number().nullable().optional(),
+  bonus: z.number().nullable().optional(),
+  bps: z.number().nullable().optional(),
+  influence: z.string().nullable().optional(),
+  creativity: z.string().nullable().optional(),
+  threat: z.string().nullable().optional(),
+  ict_index: z.string().nullable().optional(),
+  starts: z.number().nullable().optional(),
+  expected_goals: z.string().nullable().optional(),
+  expected_assists: z.string().nullable().optional(),
+  expected_goal_involvements: z.string().nullable().optional(),
+  expected_goals_conceded: z.string().nullable().optional(),
+});
+
+export const ElementSummarySchema = z.object({
+  fixtures: z.array(FixtureSchema).optional(),
+  history: z.array(HistorySchema),
+  history_past: z.array(HistoryPastSchema).optional(),
+});
+
+export type ElementSummary = z.infer<typeof ElementSummarySchema>;
+export type Fixture = z.infer<typeof FixtureSchema>;
+export type History = z.infer<typeof HistorySchema>;
+export type HistoryPast = z.infer<typeof HistoryPastSchema>;
