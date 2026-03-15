@@ -1,13 +1,17 @@
 import { z } from "zod";
+import { ElementSummarySchema } from "./schemas/elementSummary";
 import { EntryHistorySchema } from "./schemas/entryHistory";
 import { EntrySummarySchema } from "./schemas/entrySummary";
+import { GameweekPicksSchema } from "./schemas/gameweekPicks";
 import { BootstrapStaticSchema } from "./schemas/gameweeksSchema";
 import { LeagueStandingsResponseSchema } from "./schemas/leagueStandings";
 
 const schemas = {
   bootstrapStatic: BootstrapStaticSchema,
+  elementSummary: ElementSummarySchema,
   entryHistory: EntryHistorySchema,
   entrySummary: EntrySummarySchema,
+  gameweekPicks: GameweekPicksSchema,
   leagueStandings: LeagueStandingsResponseSchema,
 } as const;
 

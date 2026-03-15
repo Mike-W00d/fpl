@@ -3,53 +3,53 @@
 import { z } from 'zod';
 
 const NewEntryResultSchema = z.object({
-  id: z.number(),
-  event_total: z.number(),
-  player_name: z.string(),
-  rank: z.number(),
-  last_rank: z.number(),
-  rank_sort: z.number(),
-  total: z.number(),
-  entry: z.number(),
-  entry_name: z.string(),
-  has_played: z.boolean(),
-  club_badge_src: z.string().nullable()
+  id: z.number().nullable().optional(),
+  event_total: z.number().nullable().optional(),
+  player_name: z.string().nullable().optional(),
+  rank: z.number().nullable().optional(),
+  last_rank: z.number().nullable().optional(),
+  rank_sort: z.number().nullable().optional(),
+  total: z.number().nullable().optional(),
+  entry: z.number().nullable().optional(),
+  entry_name: z.string().nullable().optional(),
+  has_played: z.boolean().nullable().optional(),
+  club_badge_src: z.string().nullable().optional()
 });
 
 const NewEntriesSchema = z.object({
-  has_next: z.boolean(),
-  page: z.number(),
-  results: z.array(NewEntryResultSchema)
+  has_next: z.boolean().nullable().optional(),
+  page: z.number().nullable().optional(),
+  results: z.array(NewEntryResultSchema).nullable().optional()
 });
 
 const LeagueSchema = z.object({
   id: z.number(),
   name: z.string(),
-  created: z.string(), // ISO datetime string
-  closed: z.boolean(),
-  max_entries: z.number().nullable(),
-  league_type: z.string(),
-  scoring: z.string(),
-  admin_entry: z.number(),
-  start_event: z.number(),
-  code_privacy: z.string(),
-  has_cup: z.boolean(),
-  cup_league: z.number().nullable(),
-  rank: z.number().nullable()
+  created: z.string().nullable().optional(),
+  closed: z.boolean().nullable().optional(),
+  max_entries: z.number().nullable().optional(),
+  league_type: z.string().nullable().optional(),
+  scoring: z.string().nullable().optional(),
+  admin_entry: z.number().nullable().optional(),
+  start_event: z.number().nullable().optional(),
+  code_privacy: z.string().nullable().optional(),
+  has_cup: z.boolean().nullable().optional(),
+  cup_league: z.number().nullable().optional(),
+  rank: z.number().nullable().optional()
 });
 
 const StandingResultSchema = z.object({
-  id: z.number(),
-  event_total: z.number(),
+  id: z.number().nullable().optional(),
+  event_total: z.number().nullable().optional(),
   player_name: z.string(),
   rank: z.number(),
-  last_rank: z.number(),
-  rank_sort: z.number(),
+  last_rank: z.number().nullable().optional(),
+  rank_sort: z.number().nullable().optional(),
   total: z.number(),
   entry: z.number(),
   entry_name: z.string(),
-  has_played: z.boolean(),
-  club_badge_src: z.string().nullable()
+  has_played: z.boolean().nullable().optional(),
+  club_badge_src: z.string().nullable().optional()
 });
 
 const StandingsSchema = z.object({
@@ -59,8 +59,8 @@ const StandingsSchema = z.object({
 });
 
 const LeagueStandingsResponseSchema = z.object({
-  new_entries: NewEntriesSchema,
-  last_updated_data: z.string(), // ISO datetime string
+  new_entries: NewEntriesSchema.optional(),
+  last_updated_data: z.string().nullable().optional(),
   league: LeagueSchema,
   standings: StandingsSchema
 });
