@@ -8,6 +8,7 @@ import {
   LogIn,
   UserPlus,
   Trophy,
+  ArrowLeftRight,
   User,
   LogOut,
 } from "lucide-react";
@@ -30,6 +31,7 @@ const authenticatedItems = [
   { href: "/", label: "Home", icon: Home },
   { href: "/about", label: "About", icon: Info },
   { href: "/leagues", label: "Leagues", icon: Trophy },
+  { href: "/no-transfers", label: "No Xfers", icon: ArrowLeftRight },
   { href: "/account", label: "Account", icon: User },
 ];
 

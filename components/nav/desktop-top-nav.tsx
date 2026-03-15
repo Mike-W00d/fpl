@@ -21,6 +21,7 @@ const authenticatedLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/leagues", label: "My Leagues" },
+  { href: "/no-transfers", label: "No Transfers" },
   { href: "/account", label: "My Account" },
 ];
 
