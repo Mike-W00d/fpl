@@ -23,32 +23,17 @@ export async function GET(request: Request) {
     const data = await res.json();
     const parsed = validate("bootstrapStatic", data);
 
-    const finishedEvents = parsed.events.filter(
-      (event) => event.finished && event.data_checked,
-    );
-
-    const rows = finishedEvents.map((event) => {
-      const topChip = event.chip_plays.length
-        ? event.chip_plays.sort((a, b) => b.num_played - a.num_played)[0]
-        : null;
-
-      return {
-        gameweek_number: event.id,
-        highest_score: event.highest_score ?? 0,
-        average_score: event.average_entry_score,
-        most_played_chip: topChip?.chip_name ?? null,
-        chip_played_amount: topChip?.num_played ?? null,
-      };
-    });
-
-    if (rows.length === 0) {
-      return NextResponse.json({ message: "No finished gameweeks to sync" });
-    }
+    const rows = parsed.elements.map((el) => ({
+      element_id: el.id,
+      web_name: el.web_name,
+      element_type: el.element_type,
+      updated_at: new Date().toISOString(),
+    }));
 
     const supabase = createServiceClient();
     const { error } = await supabase
-      .from("gameweek_stats")
-      .upsert(rows, { onConflict: "gameweek_number" });
+      .from("players")
+      .upsert(rows, { onConflict: "element_id" });
 
     if (error) {
       return NextResponse.json(
@@ -58,8 +43,7 @@ export async function GET(request: Request) {
     }
 
     return NextResponse.json({
-      message: `Synced ${rows.length} gameweek(s)`,
-      gameweeks: rows.map((r) => r.gameweek_number),
+      message: `Synced ${rows.length} player(s)`,
     });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
