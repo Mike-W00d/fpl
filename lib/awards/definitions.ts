@@ -299,9 +299,9 @@ export const awardDefinitions: AwardDefinition[] = [
           const last = entry.history.current[entry.history.current.length - 1];
           return {
             entry,
-            increase: last.value - first.value,
-            startValue: first.value,
-            endValue: last.value,
+            increase: (last.value + last.bank) - (first.value + first.bank),
+            startValue: first.value + first.bank,
+            endValue: last.value + last.bank,
           };
         });
 
@@ -324,7 +324,7 @@ export const awardDefinitions: AwardDefinition[] = [
           player_name: best.entry.player_name,
         },
         heroStat: `£${(best.increase / 10).toFixed(1)}m`,
-        statLabel: "squad value increase",
+        statLabel: "total value increase",
         description: "Unsure where the all money is coming from — biggest squad value increase from GW1",
         runnerUp: second
           ? {
