@@ -10,6 +10,10 @@ Fantasy Premier League app built with Next.js (App Router), TailwindCSS, shadcn/
 - **Validation:** Zod schemas for FPL API responses
 - **Icons:** lucide-react
 
+## Demo user on live
+
+If you want to look at the website's functionality but don't have an fpl account Email - demo@testuser.com - password Password123
+
 ## Local Development
 
 ```bash
