@@ -299,9 +299,9 @@ export const awardDefinitions: AwardDefinition[] = [
           const last = entry.history.current[entry.history.current.length - 1];
           return {
             entry,
-            increase: (last.value + last.bank) - (first.value + first.bank),
-            startValue: first.value + first.bank,
-            endValue: last.value + last.bank,
+            increase: last.value - first.value,
+            startValue: first.value,
+            endValue: last.value,
           };
         });
 

@@ -18,6 +18,13 @@ async function LeagueContent({ id }: { id: string }) {
     notFound();
   }
 
+  const { data: latestGw } = await supabase
+    .from("gameweek_stats")
+    .select("gameweek_number")
+    .order("gameweek_number", { ascending: false })
+    .limit(1)
+    .single();
+
   let standings: StandingResult[] = [];
   let leagueName = league.name;
   let fetchError = false;
@@ -56,7 +63,7 @@ async function LeagueContent({ id }: { id: string }) {
           No standings available yet.
         </p>
       ) : (
-        <LeagueTabs standings={standings} leagueId={id} totalEntrants={league.total_entrants} />
+        <LeagueTabs standings={standings} leagueId={id} totalEntrants={league.total_entrants} currentGameweek={latestGw?.gameweek_number} />
       )}
     </div>
   );

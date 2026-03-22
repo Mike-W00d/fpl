@@ -11,10 +11,12 @@ export default function LeagueTabs({
   standings,
   leagueId,
   totalEntrants,
+  currentGameweek,
 }: {
   standings: StandingResult[];
   leagueId: string;
   totalEntrants: number;
+  currentGameweek?: number;
 }) {
   return (
     <Tabs defaultValue="classic" className="flex-1 flex flex-col min-h-0">
@@ -41,7 +43,7 @@ export default function LeagueTabs({
                   Manager
                 </th>
                 <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 px-2 sm:px-4 tabular-nums">
-                  GW
+                  {currentGameweek ? `GW ${currentGameweek}` : "GW"}
                 </th>
                 <th className="text-right text-xs uppercase tracking-wide text-muted-foreground py-3 pl-2 sm:pl-4 tabular-nums">
                   Total
@@ -76,7 +78,7 @@ export default function LeagueTabs({
         </div>
       </TabsContent>
 
-      <TabsContent value="in-depth" className="flex-1 overflow-auto">
+      <TabsContent value="in-depth" className="flex-1 overflow-auto p-4">
         {totalEntrants > MAX_ENTRANTS_FOR_DETAIL ? (
           <p className="text-muted-foreground text-sm py-12 text-center">
             In-depth stats are only available for leagues with {MAX_ENTRANTS_FOR_DETAIL} or fewer members.

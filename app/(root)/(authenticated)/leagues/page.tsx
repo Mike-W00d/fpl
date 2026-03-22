@@ -74,21 +74,31 @@ async function LeaguesContent() {
                   key={league.league_id}
                   className="border-b last:border-0 even:bg-muted/50 hover:bg-accent/50 transition-colors"
                 >
-                  <td className="py-3 pr-4">
+                  <td className="py-0 pr-4">
                     <Link
                       href={`/leagues/${league.league_id}`}
-                      className="font-medium hover:underline"
+                      className="font-medium block py-3"
                     >
                       {league.name}
                     </Link>
                   </td>
-                  <td className="py-3 px-4 text-right tabular-nums">
-                    {league.total_entrants.toLocaleString()}
+                  <td className="py-0 px-4 text-right tabular-nums">
+                    <Link
+                      href={`/leagues/${league.league_id}`}
+                      className="block py-3"
+                    >
+                      {league.total_entrants.toLocaleString()}
+                    </Link>
                   </td>
-                  <td className="py-3 pl-4 text-right tabular-nums">
-                    {league.current_rank
-                      ? `#${league.current_rank.toLocaleString()}`
-                      : <span className="text-muted-foreground">&mdash;</span>}
+                  <td className="py-0 pl-4 text-right tabular-nums">
+                    <Link
+                      href={`/leagues/${league.league_id}`}
+                      className="block py-3"
+                    >
+                      {league.current_rank
+                        ? `#${league.current_rank.toLocaleString()}`
+                        : <span className="text-muted-foreground">&mdash;</span>}
+                    </Link>
                   </td>
                 </tr>
               ))}
